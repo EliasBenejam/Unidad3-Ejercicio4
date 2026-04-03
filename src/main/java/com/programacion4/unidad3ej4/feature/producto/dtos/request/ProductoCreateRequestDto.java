@@ -1,32 +1,31 @@
 package com.programacion4.unidad3ej4.feature.producto.dtos.request;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductoCreateRequestDto {
 
-    @NotBlank(message = "El nombre es requerido")
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    @NotBlank(message = "El código es requerido")
+    @NotBlank(message = "El código es obligatorio")
     private String codigo;
 
-    @NotBlank(message = "La descripción es requerida")
+    @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
 
-    @NotNull(message = "El precio es requerido")
+    @NotNull(message = "El precio es obligatorio")
+    @Positive(message = "El precio debe ser mayor a cero")
     private Double precio;
 
-    @NotNull(message = "El stock es requerido")
+    @NotNull(message = "El stock es obligatorio")
+    @Min(value = 0, message = "El stock no puede ser negativo")
     private Integer stock;
 
-    @NotNull(message = "La categoría es requerida")
-    private Long categoriaId;
-
+    @NotNull(message = "El ID de la categoría es obligatorio")
+    private Long idCategoria;
 }

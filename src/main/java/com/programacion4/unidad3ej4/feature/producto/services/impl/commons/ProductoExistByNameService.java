@@ -5,16 +5,16 @@ import org.springframework.stereotype.Service;
 import com.programacion4.unidad3ej4.feature.producto.repositories.IProductoRepository;
 import com.programacion4.unidad3ej4.feature.producto.services.interfaces.commons.IProductoExistByNameService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProductoExistByNameService implements IProductoExistByNameService {
 
     private final IProductoRepository productoRepository;
-    
+
     @Override
-    public boolean existByName(String nombre) {
+    public boolean execute(String nombre) {
         return productoRepository.existsByNombre(nombre);
     }
 }

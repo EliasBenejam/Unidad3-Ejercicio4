@@ -1,17 +1,17 @@
 package com.programacion4.unidad3ej4.feature.producto.config;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.programacion4.unidad3ej4.feature.producto.models.Producto;
 import com.programacion4.unidad3ej4.feature.producto.models.Categoria;
-import com.programacion4.unidad3ej4.feature.producto.repositories.IProductoRepository;
+import com.programacion4.unidad3ej4.feature.producto.models.Producto;
 import com.programacion4.unidad3ej4.feature.producto.repositories.ICategoriaRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.programacion4.unidad3ej4.feature.producto.repositories.IProductoRepository;
 
 @Configuration
 public class ProductoDataLoader {
@@ -29,12 +29,10 @@ public class ProductoDataLoader {
     public CommandLineRunner cargarDatos(IProductoRepository productoRepository, 
                                         ICategoriaRepository categoriaRepository) {
         return args -> {
-            // 1. Verificamos si ya hay datos
             if (productoRepository.count() > 0 || categoriaRepository.count() > 0) {
                 return;
             }
 
-            // 2. Crear y guardar Categorías
             List<Categoria> categoriasSubidas = new ArrayList<>();
             String[] nombresCategorias = {"Cat 1", "Cat 2", "Cat 3"};
             
@@ -44,9 +42,8 @@ public class ProductoDataLoader {
                 categoriasSubidas.add(categoriaRepository.save(cat));
             }
 
-            // 3. Crear Productos Aleatorios
             Random random = new Random();
-            int cantidad = 5 + random.nextInt(6); // Entre 5 y 10 productos
+            int cantidad = 5 + random.nextInt(6);
 
             for (int i = 0; i < cantidad; i++) {
                 String tipo = TIPOS_PRODUCTO[random.nextInt(TIPOS_PRODUCTO.length)];
@@ -63,7 +60,6 @@ public class ProductoDataLoader {
                 producto.setStock(10 + random.nextInt(91));
                 producto.setEstaEliminado(false);
 
-                // Asignar una categoría aleatoria de las que acabamos de crear
                 Categoria catAsignada = categoriasSubidas.get(random.nextInt(categoriasSubidas.size()));
                 producto.setCategoria(catAsignada);
 

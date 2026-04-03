@@ -4,7 +4,5 @@ import com.programacion4.unidad3ej4.feature.producto.dtos.request.ProductoCreate
 import com.programacion4.unidad3ej4.feature.producto.dtos.response.ProductoResponseDto;
 
 public interface IProductoCreateService {
-    
-    ProductoResponseDto create(ProductoCreateRequestDto dto);
-    
+    ProductoResponseDto execute(ProductoCreateRequestDto request);
 }

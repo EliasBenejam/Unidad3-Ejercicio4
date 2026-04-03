@@ -1,8 +1,8 @@
 package com.programacion4.unidad3ej4.config.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
 
@@ -14,8 +14,7 @@ public abstract class CustomException extends RuntimeException {
 
     public CustomException(String message, HttpStatus status, List<String> errors) {
         super(message);
-        this.status = HttpStatus.BAD_REQUEST;
-        this.errors = List.of(message);
+        this.status = status; 
+        this.errors = errors; 
     }
-
 }
